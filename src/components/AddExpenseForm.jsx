@@ -22,7 +22,7 @@ const AddExpenseForm = ({ budgets }) => {
             </span>{" "}
             Expense
             </h2>
-            <fetcher.Form method="post" className="grid-sm" ref={formRef={}}>
+            <fetcher.Form method="post" className="grid-sm" ref={formRef}>
                 <div className="expense-inputs">
                     <div className="grid-xs">
                         <label htmlFor="newExpense">Expense Name</label>
