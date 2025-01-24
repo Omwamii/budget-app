@@ -9,28 +9,31 @@ import Table from "../components/Table";
 
 export const dashboardLoader = () => {
     // run when the '/dashboard' route is loaded
-    const userName = fetchData("username");
+    const userName = fetchData("userName");
     const budgets = fetchData("budgets");
-    const expenses = fetchData("expenses");
+    const expenses = fetchData("expenses")
 
     return { userName, budgets, expenses }
 }
 
 export async function dashboardAction({request}) {
     await waait()
-    const data = request.formData();
+
+    const data = await request.formData();
     const {_action, ...values}= Object.fromEntries(data);
 
     if (_action === "newUser") {
         try {
             localStorage.setItem("userName", JSON.stringify(values.userName))
             return toast.success("Welcome", values.userName)
+
         } catch (error) {
             throw new Error("There was a problem creating your account");
         }
     }
 
     if (_action === 'addBudget') {
+        console.log(values)
         try {
             createBudget(values.newBudget, values.newBudgetAmount)
             return toast.success(`Budget created!`);
@@ -41,7 +44,7 @@ export async function dashboardAction({request}) {
 
     if (_action === 'createExpense') {
         try {
-            createExpense(values.newExpense, values.amount, values.newExpenseBudget)
+            createExpense(values.newExpense, values.newExpenseAmount, values.newExpenseBudget)
             return toast.success(`Expense ${values.newExpense} created!`)
         } catch (error) {
             throw new Error("An error occured in creating your expense")
@@ -79,7 +82,7 @@ const Dashboard = () => {
                             </div>
                             <h2>Existing Budgets</h2>
                             <div className="budgets">
-                                {
+                                {budgets && 
                                     budgets.map((budget) => (
                                     <BudgetItem  key={budget} budget={budget} />
                                     ))

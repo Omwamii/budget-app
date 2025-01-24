@@ -6,12 +6,13 @@ import Nav from "../components/Nav";
 
 export const mainLoader = () => {
     // run when the '/dashboard' route is loaded
-    const userName = fetchData("username");
+    const userName = fetchData("userName");
     return { userName }
 }
 
 const Main = () => {
-    const { userName } = useLoaderData()
+    const { userName } = useLoaderData();
+
     return (
         <div className="layout">
             <Nav userName={userName} />

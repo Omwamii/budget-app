@@ -9,7 +9,9 @@ const generateRandomColor = () => {
     return `${existingBudgetsLength * 34} 65% 50%`;
 }
 
-export const createBudget = ({name, amount}) => {
+export const createBudget = (name, amount) => {
+    console.log('in create budget function');
+    console.log(name, amount)
     const newItem = {
         id: crypto.randomUUID(),
         name: name,
@@ -21,7 +23,7 @@ export const createBudget = ({name, amount}) => {
     return localStorage.setItem("budgets", JSON.stringify([...existingBudgets, newItem]))
 }
 
-export const createExpense = ({name, amount, budgetId}) => {
+export const createExpense = (name, amount, budgetId) => {
     const newItem = {
         id: crypto.randomUUID(),
         name: name,
@@ -60,12 +62,14 @@ export const formatDate = (epoch) => {
     return new Date(epoch).toLocaleDateString();
 }
 
-export const getAllaMatchingItems = ({ category, key, value }) => {
+export const getAllMatchingItems = ({ category, key, value }) => {
     const data = fetchData(category) ?? [];
     return data.filter((item) => item[key] === value);
 }
 
 export const deleteItem = ({ key, id}) => {
+    console.log('deleting...')
+    console.log(key, id)
     const existingData = fetchData(key);
     if (id) {
         const newData = existingData.filter((item) => item.id !== id)

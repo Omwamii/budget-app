@@ -11,7 +11,7 @@ export const expensesPageLoader = () => {
     return { userName, budgets, expenses }
 }
 
-export async function epxensesAction({ request }){
+export async function expensesAction({ request }){
     const data = await request.formData();
     const {_action, ...values } = Object.fromEntries(data);
 

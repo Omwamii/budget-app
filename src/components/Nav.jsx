@@ -3,6 +3,7 @@ import { Form, NavLink } from "react-router-dom";
 import { TrashIcon } from '@heroicons/react/24/solid';
 
 const Nav = ({ userName }) => {
+
     return (
         <nav>
             {userName}
@@ -14,7 +15,7 @@ const Nav = ({ userName }) => {
                 userName && (
                     <Form 
                     method="post"
-                    action="/logout"
+                    action="logout"
                     onSubmit={(event) => {
                         if (!confirm("Delete User and all data?")) {
                             event.preventDefault();
